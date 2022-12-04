@@ -133,6 +133,7 @@ public class Main {
         int choice = sc.nextInt();
         switch (choice) {
             case 1:
+            oak();
 
                 break;
             case 2:
