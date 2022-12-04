@@ -1,7 +1,7 @@
 public class Person {
     private String username;
     private String password;
-    private String email;
+    //private String email;
 
     public String getUsername() {
         return username;
@@ -11,14 +11,14 @@ public class Person {
         return password;
     }
 
-    public String getEmail() {
-        return email;
-    }
+//    public String getEmail() {
+//        return email;
+//    }
 
-    public Person(String username, String password, String email) {
+    public Person(String username, String password) {
         this.username = username;
         this.password = password;
-        this.email = email;
+//        this.email = email;
     }
 
 }
