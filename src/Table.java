@@ -90,6 +90,14 @@ abstract class Table {
         return discount;
     }
 
+    public int getNumDrawers() {
+        return numberOfDrawers;
+    }
+
+    public int getNumTables() {
+        return numOfTables;
+    }
+
     //abstract public double woodPrice();
 
 
