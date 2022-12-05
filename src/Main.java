@@ -2,10 +2,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         landing_page();
+
     }
+
+    static String currentUser;
 
     static void sign_up() throws IOException {
 
@@ -14,6 +18,9 @@ public class Main {
         System.out.println("Enter your username: ");
         String username = sc.nextLine();
         String password, confirm_password;
+        String currentPath = System.getProperty("user.dir");
+        String fileName = currentPath + "\\files\\Users.csv";
+        File file = new File(fileName);
         do {
             System.out.println("Enter your password: ");
             password = sc.nextLine();
@@ -21,8 +28,8 @@ public class Main {
             confirm_password = sc.nextLine();
             if (password.equals(confirm_password)) {
                 Person person = new Person(username, password);
-                String fileName = "G:\\Education\\Daystar Work\\Semesters\\Aug 2022\\ACS 213\\MiniProject\\files\\Users.csv";
-                File file = new File(fileName);
+
+
                 if (file.createNewFile()) {
                     System.out.println("File created: " + file.getName());
                     BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
@@ -31,7 +38,7 @@ public class Main {
                 } else {
                     System.out.println("File already exists.");
                     BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
-                    writer.write(person.getUsername() + "," + person.getPassword());
+                    writer.write(person.getUsername() + "," + person.getPassword() + "\n");
                     writer.close();
 
                 }
@@ -43,8 +50,8 @@ public class Main {
 
         Person person = new Person(username, password);
         try {
-            String fileName = "G:\\Education\\Daystar Work\\Semesters\\Aug 2022\\ACS 213\\MiniProject\\files\\Users.csv";
-            File file = new File(fileName);
+
+
             if (file.createNewFile()) {
                 System.out.println("File created: " + file.getName());
             } else {
@@ -58,44 +65,55 @@ public class Main {
         }
     }
 
-    static void login() {
+    static void login() throws IOException {
         ArrayList<Person> users = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your username: ");
         String username = sc.nextLine();
         System.out.println("Enter your password: ");
         String password = sc.nextLine();
-        Scanner myReader = null;
+
+        BufferedReader br = null;
         try {
-            String fileName = "G:\\Education\\Daystar Work\\Semesters\\Aug 2022\\ACS 213\\MiniProject\\files\\Users.csv";
-            File file = new File(fileName);
-            myReader = new Scanner(file);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                String[] user = data.split(",");
-                Person person = new Person(user[0], user[1]);
-                users.add(person);
-            }
-            while (true) {
-                for (Person user : users) {
-                    if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                        System.out.println("You have successfully logged in!");
-                        break;
-                    } else {
-                        System.out.println("Invalid username or password");
-                        break;
-                    }
+
+            br = new BufferedReader(new FileReader("files\\Users.csv"));
+            {
+                String data = br.readLine();
+                while (data != null) {
+
+                    String[] creds = data.split(",");
+                    Person person = new Person(creds[0], creds[1]);
+                    users.add(person);
+                    data = br.readLine();
                 }
+
             }
+
+            for (Person user : users) {
+
+                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                    System.out.println("You have successfully logged in!");
+                    System.out.println("Welcome " + username);
+                    currentUser = username;
+                    user_page();
+                    break;
+
+                }
+
+            }
+
+//            System.out.println("Invalid username or password");
+//            landing_page();
+
 
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        myReader.close();
+        br.close();
     }
 
-    static void landing_page() {
+    static void landing_page() throws IOException {
         System.out.println("Welcome to the Furniture Shop!");
         System.out.println("1. Sign up");
         System.out.println("2. Login");
@@ -123,6 +141,7 @@ public class Main {
     }
 
     static void user_page() {
+
         System.out.println("Welcome to the Furniture Shop!");
         System.out.println("Select wood type: ");
         System.out.println("1. Oak");
@@ -133,13 +152,20 @@ public class Main {
         int choice = sc.nextInt();
         switch (choice) {
             case 1:
-            oak();
-
+                Oak oak = new Oak();
+                oak.getPriceInKsh();
+                System.out.println("Your total price is: " + oak.PriceInKsh);
                 break;
             case 2:
+                Pine pine = new Pine();
+                pine.getPriceInKsh();
+                System.out.println("Your total price is: " + pine.PriceInKsh);
 
                 break;
             case 3:
+                Mahogany mahogany = new Mahogany();
+                mahogany.getPriceInKsh();
+                System.out.println("Your total price is: " + mahogany.PriceInKsh);
 
                 break;
             case 4:

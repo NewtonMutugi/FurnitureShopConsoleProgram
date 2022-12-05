@@ -1,11 +1,12 @@
 public class Pine extends Table{
-    public Pine(int numberOfDrawers, double lengthInCm, double widthInCm) {
-        super(numberOfDrawers, lengthInCm, widthInCm);
+   public  Pine(){
+       super();
     }
     @Override
-    double getPriceInKsh() {
-        if(tableArea > STDSIZE){
-            PriceInKsh = ((tableArea-STDSIZE)*825) + STDPRICE;
+   double getPriceInKsh() {
+       if(area() > STDSIZE){
+            PriceInKsh = (((area()-STDSIZE)*825)  + drawerPrice() + STDPRICE) * discount();
+
         }
         return PriceInKsh;
     }
