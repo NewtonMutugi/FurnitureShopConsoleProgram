@@ -1,12 +1,13 @@
 public class Mahogany extends Table {
     final double MAHPRICE = 3000;
-    public Mahogany(int numberOfDrawers, double lengthInCm, double widthInCm) {
-        super(numberOfDrawers, lengthInCm, widthInCm);
+   public Mahogany() {
+        super();
     }
     @Override
     double getPriceInKsh() {
-        if(tableArea > STDSIZE){
-            PriceInKsh = ((tableArea-STDSIZE)*825) + STDPRICE+MAHPRICE;
+        if(area() > STDSIZE){
+            PriceInKsh = (((area()-STDSIZE)*825)  + drawerPrice() + STDPRICE+MAHPRICE) * discount();
+            
         }
         return PriceInKsh;
     }
