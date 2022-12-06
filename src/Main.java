@@ -1,4 +1,6 @@
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -143,7 +145,7 @@ public class Main {
         }
     }
 
-    static void user_page() {
+    static void user_page() throws IOException {
 
         System.out.println("Welcome to the Furniture Shop!");
         System.out.println("Select wood type: ");
@@ -155,21 +157,20 @@ public class Main {
         WoodChoice = sc.nextInt();
         switch (WoodChoice) {
             case 1:
-                Oak oak = new Oak();
+                Table oak = new Oak();
                 oak.getPriceInKsh();
-                System.out.println("Your total price is: " + oak.PriceInKsh);
+                invoiceGeneration(oak.lengthInCm, oak.widthInCm, oak.numberOfDrawers, oak.numOfTables, oak.PriceInKsh);
                 break;
             case 2:
-                Pine pine = new Pine();
+                Table pine = new Pine();
                 pine.getPriceInKsh();
-                System.out.println("Your total price is: " + pine.PriceInKsh);
 
+                invoiceGeneration(pine.lengthInCm, pine.widthInCm, pine.numberOfDrawers, pine.numOfTables, pine.PriceInKsh);
                 break;
             case 3:
-                Mahogany mahogany = new Mahogany();
+                Table mahogany = new Mahogany();
                 mahogany.getPriceInKsh();
-                System.out.println("Your total price is: " + mahogany.PriceInKsh);
-
+                invoiceGeneration(mahogany.lengthInCm, mahogany.widthInCm, mahogany.numberOfDrawers, mahogany.numOfTables, mahogany.PriceInKsh);
                 break;
             case 4:
                 System.out.println("Thank you for visiting us!");
@@ -181,38 +182,52 @@ public class Main {
 
     }
 
-    public void invoiceGeneration() throws IOException {
+
+    public static void invoiceGeneration(double length, double width, int drawers, int quantity, double price) throws IOException {
         Table table = null;
-        if(WoodChoice == 1){
+        String wood = null;
+        if (WoodChoice == 1) {
             table = new Oak();
-        }else if(WoodChoice == 2){
+            wood = "Oak";
+        } else if (WoodChoice == 2) {
             table = new Mahogany();
-        }else if(WoodChoice == 3){
+            wood = "Mahogany";
+        } else if (WoodChoice == 3) {
             table = new Pine();
+            wood = "Pine";
         }
+        BigDecimal bd = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
+        price = bd.doubleValue();
+        try {
+            String invoice = "\n\n" +
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter("files\\Users.csv"));
-        writer.write("\n\n" +
+                    "----------------------------------------------------------------------------\n" +
+                    " *********************ANTIQUE FURNITURE KENYA LIMITED***********************\n" +
+                    "                             Westlands, Nairobi                             \n" +
+                    "                                                                            \n" +
+                    "      NAME: " + currentUser + "                                             \n" +
+                    "                                                                            \n" +
+                    "      TABLE DESCRIPTION                                                     \n" +
+                    "    _____________________                                                   \n" +
+                    "        Wood type: " + wood + "                                             \n" +
+                    "        Length of Table: " + length + "                                     \n" +
+                    "        Width of Table: " + width + "                                       \n" +
+                    "        Number of drawers: " + drawers + "                                  \n" +
+                    "        Number of tables: " + quantity + "                                  \n" +
+                    "                                                                            \n" +
+                    String.format("Total price is %.2f", price) + " Kshs" + "                    \n" +
 
-                "----------------------------------------------------------------------------\n" +
-                " *********************ANTIQUE FURNITURE KENYA LIMITED***********************\n" +
-                "                             Westlands, Nairobi                             \n" +
-                "                                                                            \n" +
-                "      NAME: " + currentUser + "                                                 \n" +
-                "                                                                            \n" +
-                "      TABLE DESCRIPTION                                                     \n" +
-                "    _____________________                                                   \n" +
-                "        Wood type:                                                          \n" +
-                "        Length of Table: " + table.getLengthInCm() + "                       \n" +
-                "        Width of Table: " + table.getWidthInCm() + "                         \n" +
-                "        Number of drawers: " + table.getNumDrawers() + "                     \n" +
-                "        Number of tables: " + table.getNumTables() + "                       \n" +
-                "                                                                            \n" +
-                "Your Total Price is:                                                    \n" +
-                "                                                                            \n" +
-                "********************WELCOME BACK TO ANTIQUE FURNITURE***********************\n");
-        writer.close();
-
+                    "                                                                            \n" +
+                    "********************WELCOME BACK TO ANTIQUE FURNITURE***********************\n";
+            BufferedWriter writer = new BufferedWriter(new FileWriter("files\\invoices\\" + currentUser + ".txt"));
+            writer.write(invoice);
+            System.out.println("Invoice generated successfully! Invoice is in the " + currentUser + ".txt file");
+            System.out.println(invoice);
+            writer.close();
+            landing_page();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
