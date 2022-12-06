@@ -10,6 +10,8 @@ public class Oak extends  Table {
     double getPriceInKsh() {
         do {
             area();
+//            drawerPrice();
+//            discount();
             if (tableArea < STDSIZE) {
                 System.out.println("The area is less than the standard size");
             } else {

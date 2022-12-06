@@ -4,16 +4,16 @@
  *********************ANTIQUE FURNITURE KENYA LIMITED***********************
                              Westlands, Nairobi                             
                                                                             
-      NAME: mutugi                                             
+      NAME: NewtonMutugi                                             
                                                                             
       TABLE DESCRIPTION                                                     
     _____________________                                                   
-        Wood type: Pine                                             
-        Length of Table: 200.0                                     
-        Width of Table: 300.0                                       
-        Number of drawers: 2                                  
-        Number of tables: 3                                  
+        Wood type: Mahogany                                             
+        Length of Table: 400.0                                     
+        Width of Table: 200.0                                       
+        Number of drawers: 1                                  
+        Number of tables: 2                                  
                                                                             
-Total price is 39548500.00 Kshs                    
+Total price is 55218750.00 Kshs                    
                                                                             
 ********************WELCOME BACK TO ANTIQUE FURNITURE***********************

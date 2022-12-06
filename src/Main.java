@@ -22,7 +22,6 @@ public class Main {
         String username = sc.nextLine();
         String password, confirm_password;
         String currentPath = System.getProperty("user.dir");
-        currentPath.trim();
         String fileName = currentPath + "\\files\\Users.csv";
         File file = new File(fileName);
         do {
@@ -44,7 +43,7 @@ public class Main {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
                     writer.write(person.getUsername() + "," + person.getPassword() + "\n");
                     writer.close();
-
+                    landing_page();
                 }
                 break;
             } else {
@@ -52,21 +51,6 @@ public class Main {
             }
         } while (true);
 
-        Person person = new Person(username, password);
-        try {
-
-
-            if (file.createNewFile()) {
-                System.out.println("File created: " + file.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-            System.out.println("You have successfully signed up!");
-
-            landing_page();
-        } catch (IOException e) {
-
-        }
     }
 
 
@@ -183,7 +167,7 @@ public class Main {
     }
 
 
-    public static void invoiceGeneration(double length, double width, int drawers, int quantity, double price) throws IOException {
+    public static void invoiceGeneration(double length, double width, int drawers, int quantity, double price) {
         Table table = null;
         String wood = null;
         if (WoodChoice == 1) {
@@ -215,7 +199,7 @@ public class Main {
                     "        Number of drawers: " + drawers + "                                  \n" +
                     "        Number of tables: " + quantity + "                                  \n" +
                     "                                                                            \n" +
-                    String.format("Total price is %.2f", price) + " Kshs" + "                    \n" +
+                    String.format("Total price is Kshs. %.2f", price) +"                    \n" +
 
                     "                                                                            \n" +
                     "********************WELCOME BACK TO ANTIQUE FURNITURE***********************\n";
