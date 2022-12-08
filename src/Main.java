@@ -122,6 +122,7 @@ public class Main {
                 break;
             case 3:
                 System.out.println("Thank you for visiting us!");
+                System.exit(0);
                 break;
             default:
                 System.out.println("Invalid choice!");
@@ -136,7 +137,7 @@ public class Main {
         System.out.println("1. Oak");
         System.out.println("2. Pine");
         System.out.println("3. Mahogany");
-        System.out.println("4. Exit");
+        System.out.println("4. Logout");
         Scanner sc = new Scanner(System.in);
         WoodChoice = sc.nextInt();
         switch (WoodChoice) {
@@ -158,6 +159,7 @@ public class Main {
                 break;
             case 4:
                 System.out.println("Thank you for visiting us!");
+                landing_page();
                 break;
             default:
                 System.out.println("Invalid choice!");
@@ -193,11 +195,11 @@ public class Main {
                     "                                                                            \n" +
                     "      TABLE DESCRIPTION                                                     \n" +
                     "    _____________________                                                   \n" +
-                    "        Wood type: " + wood + "                                             \n" +
-                    "        Length of Table: " + length + "                                     \n" +
-                    "        Width of Table: " + width + "                                       \n" +
+                    "        Wood type:         " + wood + "                                             \n" +
+                    "        Length of Table:   " + length + "                                     \n" +
+                    "        Width of Table:    " + width + "                                       \n" +
                     "        Number of drawers: " + drawers + "                                  \n" +
-                    "        Number of tables: " + quantity + "                                  \n" +
+                    "        Number of tables:  " + quantity + "                                  \n" +
                     "                                                                            \n" +
                     String.format("Total price is Kshs. %.2f", price) +"                    \n" +
 
