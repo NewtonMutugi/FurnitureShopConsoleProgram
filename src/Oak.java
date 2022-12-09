@@ -13,7 +13,7 @@ public class Oak extends  Table {
 //            drawerPrice();
 //            discount();
             if (tableArea < STDSIZE) {
-                System.out.println("The area is less than the standard size");
+                System.out.println("The area is less than the standard size.  Width must be greater than 80cm and length must be greater than 120cm");
             } else {
                 PriceInKsh = (((tableArea - STDSIZE) * 825) + drawerPrice() + STDPRICE+OAKPRICE) * discount();
 
